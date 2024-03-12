@@ -186,6 +186,17 @@ class Icon {
 
   /// The url to this icon
   String? url;
+
+  /// Returns the complete url to access the icon.
+  /// [url] only contains the leaf and requires device root address to be accessed.
+  String? getCompleteUrl(String deviceUrl) {
+    final String? ip = deviceUrl.findIp();
+    if (ip == null || ip.isEmpty) {
+      return null;
+    }
+    return "http://$ip$url";
+  }
+
 }
 
 /// This class holds some constants for URNs for common devices
