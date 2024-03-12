@@ -197,6 +197,16 @@ class Icon {
     return "http://$ip$url";
   }
 
+  String? findIp(){
+    const String number = "(25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])";
+    const String port = "(\:([0-9]{1,5}))";
+
+    final RegExp regExp = RegExp("($number\.){3}$number(?:$port)?");
+    final RegExpMatch? match = regExp.firstMatch(this);
+
+    return match?[0];
+  }
+
 }
 
 /// This class holds some constants for URNs for common devices
