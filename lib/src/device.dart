@@ -44,6 +44,9 @@ class Device {
   /// The URL to the manufacturer site
   String? manufacturerUrl;
 
+  /// The SSID name of the device
+  String? ssidName;
+
   /// The list of icons
   List<Icon> icons = [];
 
@@ -80,6 +83,7 @@ class Device {
     modelType = XmlUtils.getTextSafe(deviceNode, 'modelType');
     modelDescription = XmlUtils.getTextSafe(deviceNode, 'modelDescription');
     manufacturerUrl = XmlUtils.getTextSafe(deviceNode, 'manufacturerURL');
+    ssidName = XmlUtils.getTextSafe(deviceNode, "ssidName");
 
     if (udn != null) {
       uuid = udn!.substring('uuid:'.length);
@@ -150,6 +154,20 @@ class Device {
       return null;
     }
   }
+
+  /// Returns biggest icon (in height) available in [icons].
+  Icon? get bestIcon {
+    Icon? best;
+    for (final Icon icon in icons) {
+      if ((icon.height ?? 0) > (best?.height ?? 0)) {
+        best = icon;
+      }
+    }
+    return best;
+  }
+
+  @override
+  String toString() => "${friendlyName ?? ""} SSID => ${ssidName ?? ""}";
 }
 
 /// An icon of an upnp device
