@@ -190,7 +190,7 @@ class Icon {
   /// Returns the complete url to access the icon.
   /// [url] only contains the leaf and requires device root address to be accessed.
   String? getCompleteUrl(String deviceUrl) {
-    final String? ip = deviceUrl.findIp();
+    final String? ip = deviceUrl.findIpUpnp();
     if (ip == null || ip.isEmpty) {
       return null;
     }
@@ -219,7 +219,7 @@ class CommonDevices {
 }
 
 extension IpExtension on String{
-  String? findIp(){
+  String? findIpUpnp(){
     const String number = "(25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])";
     const String port = "(\:([0-9]{1,5}))";
 
